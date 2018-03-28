@@ -42,15 +42,15 @@ def getModel(input_shape=(32,32,2)):
     
     
     #fc layers    
-    dense_size = 4*4*128 # то есть 2048
+#    dense_size = 2*2*128 # то есть 512
     model.add(Flatten()) #2048
     
-    model.add(Dense(dense_size, activation='relu'))
-    model.add(Dense(dense_size, activation='relu'))
-    model.add(Dense(1, activation='softmax'))  # че то совсем не уверен
+    model.add(Dense(32, activation='relu')) #32
+#    model.add(Dense(dense_size, activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))  # че то совсем не уверен #sigmoid
     return model
 
-
+#EPOCH 30
 
 
 #main 
@@ -76,11 +76,13 @@ def random_coord():
     return (random.randint(0,31),random.randint(0,31))       
 point_data = numpy.zeros( (3000,15,8,32,32) )
 print(random.randint(0,31))
-
+result=numpy.zeros(3000,15,8,)
 for el_15 in point_data:
     for el_8 in el_15: # el_8 shape = (8,32,32)
             for landscape in el_8:
+                
                 landscape[random_coord()] = 1
+                
 #%%
 import math                
 def get_n(p1,p2): # единичный направляющий вектор
