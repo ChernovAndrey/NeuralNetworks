@@ -37,16 +37,17 @@ def random_points():
 
 #point_data = numpy.zeros( (3000,15,8,32,32) )
 point_data = numpy.zeros( ( count_landscapes, count_pair_points, count_shifts, count_pixels, count_pixels ) )
-result=numpy.zeros( (count_landscapes, count_pair_points , count_shifts ))
+#result=numpy.zeros( (count_landscapes, count_pair_points , count_shifts ))
 #for el_15 in point_data:
 #    for el_8 in el_15: # el_8 shape = (8,32,32)
 #            for landscape in el_8:# shape= (32,32)
 #                p1,p2=random_points()
 #                landscape[p1] = 1
 #                landscape[p2] = 1
-
+#%%
 for i in range(count_landscapes):
-    print("START LANDSCAPE NUMBER:",i)
+    if (i%200==0):
+        print("START LANDSCAPE NUMBER:",i)
     for j in range(count_pair_points):
         for k in range(count_shifts):
             points_landscape=point_data[i][j][k]
@@ -60,18 +61,72 @@ for i in range(count_landscapes):
             if ( calculateResult( (x1,y1,z1),(x2,y2,z2),image ) == True ):
                 result[i][j][k]=1
                     
+
+#%% with known result
+import numpy as np
+def calculateWithResult():                
+    result = np.random.randint(2, size=(count_landscapes,count_pair_points,count_shifts))
+    for i in range(count_landscapes):
+        if (i%10==0):
+            print("START LANDSCAPE NUMBER:",i)
+        for j in range(count_pair_points):
+            for k in range(count_shifts):
+                image= X_data[i][j][k] 
+                p1,p2=calculatePointsWithResults(image,result[i][j][k])
+                point_data[i][j][k][p1] = 1
+                point_data[i][j][k][p2] = 1
+    return point_data, result                                          
+                
+                
+def calculatePointsWithResults(matrix,expected_result):
+    result = True
+    flagFirst=False
+    p1=(0,0)
+    p2=(0,0)
+    while((result!=expected_result)or(flagFirst!=True)):
+        flagFirst=True
+        p1,p2=random_points()
+        z1=matrix[p1]
+        z2=matrix[p2]
+        x1,y1,x2,y2 =p1[0],p1[1],p2[0],p2[1]            
+        result=calculateResult( (x1,y1,z1),(x2,y2,z2),matrix)
+
+    return p1,p2
+
+pd,res = calculateWithResult()   
+#%%
+saveData('datasetsNN/landScapes/landScape_3000_32/2/points.hdf5','points_3000_2',pd)
+saveData('datasetsNN/landScapes/landScape_3000_32/2/result.hdf5','resultss_3000_2',res)
+#%%
+import numpy as np
+def saveData(path,name,data):
+    import h5py
+    h5f = h5py.File(path, 'w')
+    h5f.create_dataset(name, data=data,dtype=np.float32)
+    h5f.close()
+
+#%%
+    
+import numpy as np
+result = np.random.randint(2, size=(3000,15,8))
+
+                
             
 #%%
 print(result.shape)
 import numpy as np
 import h5py
 h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/answers.hdf5', 'w')
-h5f.create_dataset('answers_3000', data=result)
+h5f.create_dataset('answers_3001', data=result,dtype=np.float32)
+h5f.close()
+
 #%%
+print(point_data.shape)
 import numpy as np
 import h5py
 h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/points_landscape.hdf5', 'w')
-h5f.create_dataset('answers_3000', data=point_data)
+h5f.create_dataset('points_3000', data=point_data,dtype=np.float32)
+h5f.close()
 #%%
 
 #%%

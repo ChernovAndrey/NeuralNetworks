@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Apr  4 09:19:26 2018
+Created on Wed Apr  4 18:05:41 2018
 
 @author: andrey
 """
-
 #%%
 import math                
 def get_n(p1,p2): # единичный направляющий вектор
@@ -67,27 +66,15 @@ def calculateResult(p1,p2, matrix):
 #        print("res=",residual(z,p2))
 #    print("countIter=",countIter)
     return True    
-
-
-
-#%% testing algorithm
-import numpy 
-image1=numpy.random.randint(10,size=(3,3)) 
-x1=0
-y1=0
-p1 = (x1,y1)
-z1=image1[p1]
-x2=2
-y2=1
-p2=(x2,y2)
-z2=image1[p2]
-print("z",z1,z2)
-print(calculateResult((x1,y1,z1),(x2,y2,z2),image1))
-print(image1)
-print(image1[2][1])
-
 #%%
-
-
-
+def calculatePointsWithResults(p1,p2,matrix,expected_result):
+    result=calculateResult(p1,p2,matrix)    
+    while(result!=expected_result):
+        
+        result=calculateResult(p1,p2,matrix)
+        
+#%%
     
+import numpy as np
+result = np.random.randint(2, size=(3000,15,8))
+
