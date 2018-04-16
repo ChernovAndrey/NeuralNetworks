@@ -43,9 +43,9 @@ def calculateResult(p1,p2, matrix):
     countIter=0
     while( residual(z,p2) > eps):       
         countIter+=1
-        if (countIter>100000):
-            print("not work")
-            return False
+#        if (countIter>100000):
+#            print("not work")
+#            return False
         z = sumVector(z,n)
 #        print("z",z[0],z[1])
         _,x =math.modf(z[0])
