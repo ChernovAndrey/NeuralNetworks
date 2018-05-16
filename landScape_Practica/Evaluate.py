@@ -9,35 +9,58 @@ Created on Wed Apr 11 10:30:34 2018
 #%%
 import numpy as np
 import h5py
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_data.hdf5','r')
-data = h5f['dataset_3000'][...]
-h5f.close()
+#h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_data.hdf5','r')
+#data = h5f['dataset_3000'][...]
+#h5f.close()
+#
+#
+#h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_res.hdf5','r')
+#result = h5f['dataset_3000'][...]
+#h5f.close()
+#
+#print(data.shape)
+#print(result.shape)
+#
+#count_train=300000
+##x_train=data[:count_train]
+#x_test=data[count_train:]
+##y_train=result[:count_train]
+#y_test=result[count_train:]
+#%%
+import numpy as np
+import h5py
 
+def readData(path,name):
+    import h5py
+    h5f = h5py.File(path,'r')
+    result = h5f[name][...]
+    h5f.close()
+    return result
 
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_res.hdf5','r')
-result = h5f['dataset_3000'][...]
-h5f.close()
-
-print(data.shape)
-print(result.shape)
-
-count_train=300000
-#x_train=data[:count_train]
-x_test=data[count_train:]
-#y_train=result[:count_train]
-y_test=result[count_train:]
+x_test=readData('ready3PointTestData.hdf5','testData')
+y_test = readData('ready3PointTestResult.hdf5','testResult')
+#%%
+print(x_test.shape)
+print(y_test.shape)
 #%%
 from keras.models import load_model
+import keras
+#print(keras.__version__)
+model =  keras.models.load_model('model_AlexNet_3Points2.hdf5')
+#model = load_model('/home/andrey/datasetsNN/landScapes/landScape_3000_32/AlexNet/model_AlexNet_second.hdf5')
 
-model = load_model('datasetsNN/landScapes/landScape_3000_32/mix/model_twoDropOut.hdf5')
-
-print(model.summary())
+#print(model.summary())
 #%%
 
 from sklearn.metrics import confusion_matrix
 
 res_predict = model.predict(x_test)
-
+#%%
+res_predict = np.reshape(res_predict,(-1))
+y_test = np.reshape(y_test,(-1))
+print(res_predict.shape)
+print(y_test.shape)
+#%%
 def getInt(vector): # zero or one
     res=np.zeros(vector.shape, dtype=int)
     for i in range(len(vector)):
@@ -62,7 +85,7 @@ confusion_matrix(res_test,res_pred)
 from sklearn.metrics import precision_score,recall_score,f1_score
 print("Точность:",precision_score(res_test,res_pred))
 print("Полнота:",recall_score(res_test,res_pred))
-print("F1:",f1_score(res_test,res_pred))
+print("F1:",f1_score(res_test,res_pred)) # 0.856 лучшая
 
 #%%
 
@@ -160,15 +183,15 @@ matrixData = x_test.reshape(60000,2,32,32)
 print(matrixData.shape)
 distFP = getDistanceARR(ind_FP, matrixData)
 distFN = getDistanceARR(ind_FN, matrixData)
-print(dist.shape)
+#print(dist.shape)
 #%%
 
-plt.hist(distFP, bins = [0,5,10,15,20,25,30,32]) 
+vectorFP=plt.hist(distFP, bins = [0,5,10,15,20,25,30,32]) 
 plt.title("histogram") 
 plt.show()
 #%%
 
-plt.hist(distFN, bins = [0,5,10,15,20,25,30,32]) 
+vectorFN=plt.hist(distFN, bins = [0,5,10,15,20,25,30,32]) 
 plt.title("histogram") 
 plt.show()
 #%%
@@ -176,6 +199,21 @@ ind_all=np.arange(60000)
 distAll=getDistanceARR(ind_all,matrixData)
 #%% 
 
-plt.hist(distAll, bins = [0,5,10,15,20,25,30,32]) 
+vectorAll = plt.hist(distAll, bins = [0,5,10,15,20,25,30,32]) 
 plt.title("histogram") 
 plt.show()
+#%%
+print(vectorAll[0])
+print(vectorFP[0])
+relFP = vectorFP[0]/vectorAll[0]
+
+print(relFP)
+#%%
+print(vectorAll[0])
+print(vectorFN[0])
+relFN = vectorFN[0]/vectorAll[0]
+
+print(relFN)
+#%%
+print(relFN)
+print(relFP)

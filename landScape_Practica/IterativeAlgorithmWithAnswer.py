@@ -32,40 +32,33 @@ def sumVector(v1,v2):
 
 def calculateResult(p1,p2, matrix):
     if ((p1[0]-p2[0]==0)and(p1[1]-p2[1]==0)and(p1[2]-p2[2]==0)):
-        return True
+        
+        print('very bad',p1,p2)
+        return True, 99999.0
     #flagValue = max( matrix[p1],matrix[p2] ) # если больше него то выходим
-    tau=0.01 
+    tau=0.001 
     z = p1 # итеративная перменная.
     n = get_n(p1,p2)
 #    print('n=',n)
     n = multiNumber_Vector(tau,n)
-    eps=0.011
+    eps=0.001
     countIter=0
+    min_reject= 99999.0; # минимальное разносмть прямой и ландшафта
     while( residual(z,p2) > eps):       
         countIter+=1
-#        if (countIter>100000):
-#            print("not work")
-#            return False
         z = sumVector(z,n)
-#        print("z",z[0],z[1])
         _,x =math.modf(z[0])
         _,y =math.modf(z[1])
         x = int(x)
         y = int(y)
-#        print("x,y",x,y)
         if ((x==p2[0])and(y==p2[1])):
-#            print("countIter=",countIter)
-            return True
+            return True, min_reject
         value = matrix[x][y]
-#        print("value",value)
-#        print("z[2]",z[2])
+        if (min_reject > (z[2]-value)):
+            min_reject=z[2]-value
         if ( (z[2]<value) and  ((x!=p1[0])or(y!=p1[1])) ):
-#            print("countIter=",countIter)
-            return False
-#        print(z[0],z[1],z[2])
-#        print("res=",residual(z,p2))
-#    print("countIter=",countIter)
-    return True    
+            return False, min_reject
+    return True, min_reject    
 #%%
 def calculatePointsWithResults(p1,p2,matrix,expected_result):
     result=calculateResult(p1,p2,matrix)    
