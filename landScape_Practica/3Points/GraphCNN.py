@@ -18,9 +18,7 @@ def readData(path,name):
     return result
 def getIndexNonZeroInMatrix(matrix):
     nZero = np.nonzero(matrix)
-    print(nZero)
-    if len(nZero[0]!=1):
-        assert False, "в матрице больше одного единичного элемента"
+#    print(nZero)
     return nZero[0][0], nZero[1][0]   
 
 def getPoints(data):
@@ -39,11 +37,11 @@ def getPoints(data):
 #%%
 
 
-x_train = readData('ready3PointTrainData.hdf5','trainData')
-x_test=readData('ready3PointTestData.hdf5','testData')
+x_train = readData('clearTrainData.hdf5','input')
+x_test=readData('clearTestData.hdf5','input')
 
-y_train =readData('ready3PointTrainResult.hdf5','trainResult')
-y_test = readData('ready3PointTestResult.hdf5','testResult')
+y_train =readData('clearTrainResult.hdf5','result')
+y_test = readData('clearTestResult.hdf5','result')
 
 p_train = getPoints(x_train)
 p_test = getPoints(x_test)
@@ -62,18 +60,18 @@ print("points")
 print(p_train.shape)
 print(p_test.shape)
 
-assert False,"все ок"
+#assert False,"все ок"
 #%%
 batch_size=256
 epochs=100
 
 main_input = Input(shape=(32,32,1), dtype='float32', name='main_input')
 
-x = Conv2D( 32,kernel_size=(5,5),padding='same',activation='relu',strides=(1,1) )(main_input) 
+x = Conv2D( 64,kernel_size=(5,5),padding='same',activation='relu',strides=(1,1) )(main_input) 
 x = MaxPooling2D(pool_size=(2,2))(x) #16*16
 x = BatchNormalization()(x)
 
-x = Conv2D(64,kernel_size=(3,3),strides=(2,2),activation='relu',padding='same')(x) 
+x = Conv2D(96,kernel_size=(3,3),strides=(2,2),activation='relu',padding='same')(x) 
 x = MaxPooling2D(pool_size=(2, 2))(x)
 x = BatchNormalization()(x)
 
@@ -84,19 +82,19 @@ x = Conv2D(96,kernel_size=(3,3),activation='relu',padding='same',kernel_regulari
     #4 128
 x = Conv2D(96,kernel_size=(3,3),padding='same',activation='relu')(x) #4*4
 
-x = Dropout(0.4)(x) 
+x = Dropout(0.2)(x) 
 x = Conv2D(64,kernel_size=(3,3),padding='same',activation='relu')(x) #4*4
 x = MaxPooling2D( pool_size=(2, 2))(x) #2*2
 x = BatchNormalization()(x)
 x = Flatten()(x)
 
-x = Dense(122, activation='relu')(x) #32
+x = Dense(252, activation='relu')(x) #32
  
 points_input = Input(shape=(6,), name='points_input')
 
 x = keras.layers.concatenate([x, points_input])
 
-x = Dense(64, activation='relu')(x)
+x = Dense(128, activation='relu')(x)
 x = Dense(64, activation='relu')(x)
 
 main_output = Dense(3, activation='sigmoid', name='main_output')(x)

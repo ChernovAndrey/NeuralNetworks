@@ -5,62 +5,67 @@ Created on Wed Apr 11 10:30:34 2018
 
 @author: andrey
 """
+#%%
+result=readData('testResult.hdf5','resultTest_3000')
+result=result.reshape(-1)
+print(result.shape)
+print(len(result))
+print(result.sum())
+#print(result[10:50])
+#%%
+resultOnes=readData('clearResultOnes.hdf5','result')
+resultOnes=resultOnes.reshape(-1)
+print(resultOnes.shape)
+print(len(resultOnes))
+print(resultOnes.sum())
+
 
 #%%
-import numpy as np
-import h5py
-#h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_data.hdf5','r')
-#data = h5f['dataset_3000'][...]
-#h5f.close()
-#
-#
-#h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_res.hdf5','r')
-#result = h5f['dataset_3000'][...]
-#h5f.close()
-#
-#print(data.shape)
-#print(result.shape)
-#
-#count_train=300000
-##x_train=data[:count_train]
-#x_test=data[count_train:]
-##y_train=result[:count_train]
-#y_test=result[count_train:]
+from landScape_Practica.myUtils import saveData
+
+#%%
+from landScape_Practica.myUtils import getTestData2Points
+x_test,y_test = getTestData2Points()    
 #%%
 import numpy as np
 import h5py
 
 def readData(path,name):
-    import h5py
     h5f = h5py.File(path,'r')
     result = h5f[name][...]
     h5f.close()
     return result
+#%%  
+y_test=readData('testResult.hdf5','resultTest_3000')
 
-x_test=readData('ready3PointTestData.hdf5','testData')
-y_test = readData('ready3PointTestResult.hdf5','testResult')
+x_test = readData('testData.hdf5','test_3000_')
 #%%
 print(x_test.shape)
 print(y_test.shape)
 #%%
 from keras.models import load_model
-import keras
 #print(keras.__version__)
-model =  keras.models.load_model('model_AlexNet_3Points2.hdf5')
-#model = load_model('/home/andrey/datasetsNN/landScapes/landScape_3000_32/AlexNet/model_AlexNet_second.hdf5')
-
+#model =  keras.models.load_model('model_AlexNet_Graph_3PointsClear.hdf5')
+model = load_model('/home/andrey/datasetsNN/landScapes/landScape_3000_32/AlexNet/model_AlexNet_second.hdf5')
+print(model.summary())
 #print(model.summary())
-#%%
+#%% только для graph cnn
+p_test = getPoints(x_test)
 
+x_test = x_test[:,:,:,:1] # 360000*32*32*4 ->360000*32*32*1
+#%%
 from sklearn.metrics import confusion_matrix
 
-res_predict = model.predict(x_test)
+res_predict = model.predict([x_test,])
+#%%
+print(res_predict)
 #%%
 res_predict = np.reshape(res_predict,(-1))
 y_test = np.reshape(y_test,(-1))
 print(res_predict.shape)
 print(y_test.shape)
 #%%
+import numpy as np
 def getInt(vector): # zero or one
     res=np.zeros(vector.shape, dtype=int)
     for i in range(len(vector)):
@@ -82,10 +87,11 @@ y_test.sum()
 #%%
 confusion_matrix(res_test,res_pred)
 #%%
-from sklearn.metrics import precision_score,recall_score,f1_score
+from sklearn.metrics import precision_score,recall_score,f1_score,accuracy_score
+print("val accuracy",accuracy_score(res_test,res_pred))
 print("Точность:",precision_score(res_test,res_pred))
 print("Полнота:",recall_score(res_test,res_pred))
-print("F1:",f1_score(res_test,res_pred)) # 0.856 лучшая
+print("F1:",f1_score(res_test,res_pred)) # 0.856 лучшая; для 3 точек лучшая 0.742
 
 #%%
 
@@ -137,20 +143,77 @@ print(y_pred)
 
 #%%
 print(res_test)
-print(res_pred)
-#%%
-
-a=np.arange(9)
-
-np.where(a<4)
-ind_FN,i)
-    
+print(res_pred)  
 #%%
 
 ind_FP = np.where(( (res_test==0) & (res_pred==1)))[0] #  то есть res_test = 0 , а res_pred = 1
 ind_FN = np.where(( (res_test==1) & (res_pred==0)))[0] #  то есть res_test = 1 , а res_pred = 0
 print(ind_FP.shape)
 print(ind_FN.shape)
+
+
+
+#%% вывод reject
+reject=readData('reject.hdf5','reject')
+print(reject.shape)
+
+rej_test=reject.reshape( (reject.shape[0]*reject.shape[1]*reject.shape[2],-1) )[300000:]
+
+print(rej_test.shape)
+rej_test=rej_test.reshape(-1)
+print(rej_test.shape)
+print(rej_test)
+vectorReject=plt.hist(rej_test, bins = [-3,-2,-1,0,1,2,3]) 
+plt.title("histogram") 
+plt.show()
+
+ind_FP = np.where(( (res_test==0) & (res_pred==1)))[0] #  то есть res_test = 0 , а res_pred = 1
+ind_FN = np.where(( (res_test==1) & (res_pred==0)))[0] #  то есть res_test = 1 , а res_pred = 0
+print(ind_FP.shape)
+print(ind_FN.shape)
+
+errFP=np.empty(shape=(len(ind_FP)))
+
+j=0
+for i in range(len(ind_FP)):
+    errFP[j]=rej_test[ind_FP[i]]
+    j+=1
+print(errFP)
+plt.hist(errFP, bins = [-3,-2,-1,0,1,2,3]) 
+plt.title("histogram") 
+plt.show()
+    
+
+errFN=np.empty(shape=(len(ind_FN)))
+
+j=0
+for i in range(len(ind_FN)):
+    errFN[j]=rej_test[ind_FN[i]]
+    j+=1
+print(errFN)
+plt.hist(errFN, bins = [-3,-2,-1,0,1,2,3]) 
+plt.title("histogram") 
+plt.show()
+#%%
+print(rej_test[:10])
+print(y_test[:10])
+
+
+bugEl = np.where(( (rej_test<0) & (y_test==1)))[0] #  то есть res_test = 0 , а res_pred = 1
+print(bugEl.shape)
+print(rej_test[bugEl[0]],y_test[bugEl[0]])
+#for i in range(len(rej_test)):
+#    if ((rej_test[i]<0)and(y_test[i]==0)):
+#        print(rej_test[i])
+
+#%%
+#print(errFP)
+#plt.hist(errFP, bins = [-1,-0.9,-0.8,-0.7,0.0]) 
+#plt.title("histogram") 
+#plt.show()
+#
+
+
 #%%
 import numpy as np
 import math

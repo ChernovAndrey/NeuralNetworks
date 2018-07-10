@@ -12,6 +12,7 @@ def get_n(p1,p2): # единичный направляющий вектор
     norm = math.sqrt( v[0]*v[0]+v[1]*v[1] + v[2]*v[2] ) 
     return (v[0]/norm,v[1]/norm, v[2]/norm)               
 
+
 def max(a,b):
     if (a>b):
         return a

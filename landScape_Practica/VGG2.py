@@ -37,7 +37,7 @@ h5f.close()
 
 batch_size=256
 epochs=100
-
+#%%
 def getModel(input_shape=(32,32,2)):
     model = Sequential()
     

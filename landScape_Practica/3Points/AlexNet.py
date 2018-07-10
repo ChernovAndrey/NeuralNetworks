@@ -60,7 +60,7 @@ def getModel(input_shape=(32,32,4)):
     model.add(Conv2D(96,kernel_size=(3,3),padding='same',activation='relu')) #4*4
   
     #5
-    model.add(Dropout(0.4))
+    model.add(Dropout(0.2))
     model.add(Conv2D(64,kernel_size=(3,3),padding='same',activation='relu')) #4*4
     model.add(MaxPooling2D( pool_size=(2, 2))) #2*2
     model.add(BatchNormalization())
