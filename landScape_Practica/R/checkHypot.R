@@ -29,14 +29,12 @@ check_hypot_rand_samples <- function(num_repeat=100, num_samples = 5000){
     for (j in 1:num_samples){
       rand_num = sample(1:60000, 1, replace = T)     # 60000- всего экземпляров
       nFile = (rand_num %/% (10000+1)) + 1       # 10000 - в одном файле
-      file <- paste("/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/result",toString(nFile),sep="")
-      print(file)
+      file <- h5file(paste("/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/result",toString(nFile),sep=""),'r')
       for(k in 0:14){ # по слоям
         res0 <-  file[paste("res",toString(k),"_","0",sep="")]
         res1 <- file[paste("res",toString(k),"_","1",sep="")]
-        print(res0)
-        res_layers0[[k+1]] = c(res_layers0[[k+1]],res0)
-        res_layers1[[k+1]] = c(res_layers1[[k+1]],res1)
+        res_layers0[[k+1]] = c(res_layers0[[k+1]],res0[])
+        res_layers1[[k+1]] = c(res_layers1[[k+1]],res1[])
       }
     }
     print(res_layers0[[15]])
@@ -45,4 +43,5 @@ check_hypot_rand_samples <- function(num_repeat=100, num_samples = 5000){
 }
 
 
-check_hypot_rand_samples(1,100)
+check_hypot_rand_samples(1,10)
+

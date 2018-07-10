@@ -66,7 +66,6 @@ def saveDistribution(vector,step,flagRes,numLayers): # сохраняем numpy 
 #showDistribution(output[14],0.1)
     
 #%%
-from landScape_Practica.myUtils import saveData
     
 print(len(model.layers))
 ind0,ind1 = getInd2Class(y_test[:countSamples])
@@ -82,46 +81,5 @@ for i in range(len(model.layers)):
     #saveDistribution(res0,max(res0)/2.0, 0,i)
     #saveDistribution(res1,max(res1)/2.0, 1,i)
     #plt.show()    
-#%% generate random samples for check hypot
-from landScape_Practica.myUtils import readData,saveData
-import numpy as np
-def gen_rand_samples_for_hypot(num_layers,num_repeat=100, num_samples = 5000):
-    res0=np.empty(shape=0,dtype=int)
-    res1=np.empty(shape=0,dtype=int)
-
-    allRes0 = readData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/allResult',
-                         'res'+str(num_layers)+'_'+'0') 
-    allRes1 = readData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/allResult',
-                         'res'+str(num_layers)+'_'+'1') 
-               
-    half_num_samples = num_samples//2
-    for i in range(num_repeat):
-        rand_num0 = np.random.randint(allRes0.shape[0], size=half_num_samples)     # 60000- всего экземпляров
-        rand_num1 = np.random.randint(allRes1.shape[0], size=half_num_samples)     # 60000- всего экземпляров
-        for j in range(half_num_samples):
-                k0 = rand_num0[j]
-                k1 = rand_num1[j]
-                res0=np.concatenate( ( res0,allRes0[k0].reshape(-1) ) )
-                res1=np.concatenate( ( res1, allRes1[k1].reshape(-1) ) )
-
-    print(res0.shape)
-    print(res1.shape)
-    saveData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/rand_5000_samples_result','res'+str(num_layers)+'_0',res0)
-    saveData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/rand_5000_samples_result','res'+str(num_layers)+'_1',res1)
-    
-
-
 #%%
-gen_rand_samples_for_hypot(14,100,5000) 
-    
-#%%
-import numpy as np
-res=np.empty(shape=0,dtype=int)
-num_layers=14
-for i in range(1,7):
-    res=np.concatenate( ( res,(readData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/result'+str(i),
-                                          'res'+str(num_layers)+'_'+'1')).reshape(-1) ) )
-print(res.shape)    
-#%%%
-saveData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/allResult','res'+str(num_layers)+'_1',res)
 
