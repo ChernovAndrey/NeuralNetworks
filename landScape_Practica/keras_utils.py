@@ -83,7 +83,7 @@ def get_model_checkpointer(ModelFileNameMask):
                                                 save_best_only = False, save_weights_only = False, mode = 'auto', period = 1)
   return MCheckpointer
 
-def get_layer_output(model, x_input, layers = 'all'): # для sequential min(layers) = 0, для graphCNN =1
+def get_layer_output(model, x_input, layers = 'all'): # для sequential     min(layers) = 0, для graphCNN =1(если будет ноль, то нулевой слой будет входом в сеть)
   if K.backend() == 'cntk':
     inp = model.input
     x_input = np.asarray(x_input)
@@ -112,3 +112,4 @@ def get_layer_output(model, x_input, layers = 'all'): # для sequential min(la
     print('%s backend!'%K.backend())
     print('get_layer_output return None')
     return None
+#%%

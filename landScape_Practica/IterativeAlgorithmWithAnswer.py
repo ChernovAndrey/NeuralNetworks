@@ -33,8 +33,7 @@ def sumVector(v1,v2):
 
 def calculateResult(p1,p2, matrix):
     if ((p1[0]-p2[0]==0)and(p1[1]-p2[1]==0)and(p1[2]-p2[2]==0)):
-        
-        print('very bad',p1,p2)
+        print('very bad',p1,p2) # точки совпадают, что-то пошло не так
         return True, 99999.0
     #flagValue = max( matrix[p1],matrix[p2] ) # если больше него то выходим
     tau=0.001 
@@ -64,11 +63,7 @@ def calculateResult(p1,p2, matrix):
 def calculatePointsWithResults(p1,p2,matrix,expected_result):
     result=calculateResult(p1,p2,matrix)    
     while(result!=expected_result):
-        
         result=calculateResult(p1,p2,matrix)
         
 #%%
     
-import numpy as np
-result = np.random.randint(2, size=(3000,15,8))
-

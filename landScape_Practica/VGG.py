@@ -5,116 +5,15 @@ Created on Tue Mar 27 10:20:43 2018
 
 @author: andrey
 """
-#%%  import data
-import keras
-
-
-path ='datasetsNN/landScapes/landScape_3000_32/Landscapes_3000_32x32_clear.hdf5'
-landscapes_data = keras.utils.io_utils.HDF5Matrix(path,'Landscapes')
-print(landscapes_data.shape)
-
-
 
 #%%
-#import h5py
-#h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/answers.hdf5','r')
-#result = h5f['answers_3001'][...]
-#h5f.close()
-#
-#
-#h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/points_landscape.hdf5','r')
-#points_landscapes = h5f['points_3000'][...]
-#h5f.close()
-
-
-
-import numpy as np
-import h5py
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/points.hdf5','r')
-points_landscapes = h5f['points_3000_2'][...]
-h5f.close()
-
-
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/result.hdf5','r')
-result = h5f['resultss_3000_2'][...]
-h5f.close()
-#%% prepare data
-print(result.shape)
-print(points_landscapes.shape)
-#%%
-import numpy as np
-
-count_landscapes, count_pair_points, count_shifts, count_pixels= landscapes_data.shape[:4] 
-
-data = np.zeros( shape=( count_landscapes, count_pair_points, count_shifts, 2,count_pixels, count_pixels ), dtype = np.float16 )
-print(data.shape)
-print(landscapes_data.shape)
-print(points_landscapes.shape)
-for i in range(count_landscapes):
-    for j in range(count_pair_points):
-        for k in range(count_shifts):
-           data[i][j][k][0] = landscapes_data[i][j][k]          
-           data[i][j][k][1] = points_landscapes[i][j][k]          
-           
-print(data.shape)
-first_dim=count_landscapes*count_pair_points*count_shifts
-data = np.reshape(data,(first_dim,2,count_pixels,count_pixels))
-
-#%%
-print(data.shape)
-
-#%%%
-firstDim= data.shape[0]
-
-data = data.reshape(firstDim,32,32,2)
-print(data.shape)
-#%%
-import numpy as np
-import h5py
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_data.hdf5', 'w')
-h5f.create_dataset('dataset_3000', data=data,dtype=np.float16)
-h5f.close()
-#%%
-result=result.reshape(-1)
-#%%
-print(result.shape)
-#%%
-
-import numpy as np
-import h5py
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_res.hdf5', 'w')
-h5f.create_dataset('dataset_3000', data=result,dtype=np.float32)
-h5f.close()
-
-
-#%%
-import numpy as np
-import h5py
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_data.hdf5','r')
-data = h5f['dataset_3000'][...]
-h5f.close()
-
-
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/2/ready_res.hdf5','r')
-result = h5f['dataset_3000'][...]
-h5f.close()
-
-print(data.shape)
-print(result.shape)
-
-count_train=300000
-x_train=data[:count_train]
-x_test=data[count_train:]
-y_train=result[:count_train]
-y_test=result[count_train:]
-#%%
-print(y_test[100:120])
-#%%
-import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D
 
+
+from myUtils import getTestData2Points
+x_train,y_train,x_test,y_test = getTestData2Points()
 
 batch_size=256
 epochs=30

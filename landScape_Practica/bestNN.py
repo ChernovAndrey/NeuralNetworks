@@ -7,42 +7,10 @@ Created on Wed Apr  4 19:46:16 2018
 """
 
 #%%
-import numpy as np
-import h5py
-
-
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/mix/trainData.hdf5','r')
-x_train = h5f['train_3000_'][...]
-h5f.close()
-
-
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/mix/trainResult.hdf5','r')
-y_train = h5f['result_3000'][...]
-h5f.close()
-
-
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/mix/testData.hdf5','r')
-x_test = h5f['test_3000_'][...]
-h5f.close()
-
-
-
-h5f = h5py.File('datasetsNN/landScapes/landScape_3000_32/mix/testResult.hdf5','r')
-y_test = h5f['resultTest_3000'][...]
-h5f.close()
-#%%
+from myUtils import getTestData2Points
+x_train,y_train,x_test,y_test = getTestData2Points()
 
 #%%
-
-x_test_sc=x_test/255
-print(x_test_sc[0][0][0][0])
-print(x_test[0][0][0][0])
-#%%
-print(x_test.max())
-print(x_train.max())
-
-#%%
-import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D

@@ -1,16 +1,16 @@
 значения p-value для каждого слоя.(критерием Манна-Уитни)
-0:0.1426 (conv) +
-1:0.1426 (max_pool) +
-2:0.9943 (batch_norm)
-3:0.000259 (conv) +
-4:0.9217 (max_pool) +  
-5:0.05561 (batch_norm)+
-6:5.72e-05 (conv) +
-7:0.001099 (conv) +
-8:0.3862 (dropout) +
-9:2.2e-16 (conv) +
-10: 2.2e-16 (max_pool) +
-11:2.2e-16 (batch_norm) +
-12:2.2e-16 (flatten)+
-13:2.2e-16 (dense) +
+1:0.1426 (conv) +
+2:0.1426 (max_pool) +
+3:0.9943 (batch_norm)
+4:0.000259 (conv) +
+5:0.9217 (max_pool) +  
+6:0.05561 (batch_norm)+
+7:5.72e-05 (conv) +
+8:0.001099 (conv) +
+9:0.3862 (dropout) +
+10:2.2e-16 (conv) +
+11: 2.2e-16 (max_pool) +
+12:2.2e-16 (batch_norm) +
+13:2.2e-16 (flatten)+
 14:2.2e-16 (dense) +
+15:2.2e-16 (dense) +

@@ -25,7 +25,7 @@ def multiNumber_Vector(a,v):
     return(a*v[0],a*v[1],a*v[2])
 
 def residual(a,b):
-    max_ab=  max( abs(a[0]-b[0]),abs(a[1]-b[1]))
+    max_ab =  max( abs(a[0]-b[0]),abs(a[1]-b[1]))
     return max(max_ab,abs(a[2]-b[2]) )
 
 def sumVector(v1,v2):
@@ -34,11 +34,9 @@ def sumVector(v1,v2):
 def calculateResult(p1,p2, matrix):
     if ((p1[0]-p2[0]==0)and(p1[1]-p2[1]==0)and(p1[2]-p2[2]==0)):
         return True
-    #flagValue = max( matrix[p1],matrix[p2] ) # если больше него то выходим
     tau=0.01 
     z = p1 # итеративная перменная.
     n = get_n(p1,p2)
-#    print('n=',n)
     n = multiNumber_Vector(tau,n)
     eps=0.011
     countIter=0
@@ -48,43 +46,35 @@ def calculateResult(p1,p2, matrix):
             print("not work")
             return False
         z = sumVector(z,n)
-#        print("z",z[0],z[1])
         _,x =math.modf(z[0])
         _,y =math.modf(z[1])
         x = int(x)
         y = int(y)
-#        print("x,y",x,y)
         if ((x==p2[0])and(y==p2[1])):
-#            print("countIter=",countIter)
             return True
         value = matrix[x][y]
-#        print("value",value)
-#        print("z[2]",z[2])
         if ( (z[2]<value) and  ((x!=p1[0])or(y!=p1[1])) ):
-#            print("countIter=",countIter)
             return False
-#        print(z[0],z[1],z[2])
-#        print("res=",residual(z,p2))
-#    print("countIter=",countIter)
     return True    
 
 
 
 #%% testing algorithm
-import numpy 
-image1=numpy.random.randint(10,size=(3,3)) 
-x1=0
-y1=0
-p1 = (x1,y1)
-z1=image1[p1]
-x2=2
-y2=1
-p2=(x2,y2)
-z2=image1[p2]
-print("z",z1,z2)
-print(calculateResult((x1,y1,z1),(x2,y2,z2),image1))
-print(image1)
-print(image1[2][1])
+def test():
+    import numpy 
+    image1=numpy.random.randint(10,size=(3,3)) 
+    x1=0
+    y1=0
+    p1 = (x1,y1)
+    z1=image1[p1]
+    x2=2
+    y2=1
+    p2=(x2,y2)
+    z2=image1[p2]
+    print("z",z1,z2)
+    print(calculateResult((x1,y1,z1),(x2,y2,z2),image1))
+    print(image1)
+    print(image1[2][1])
 
 #%%
 

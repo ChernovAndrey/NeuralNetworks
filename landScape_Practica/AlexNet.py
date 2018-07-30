@@ -7,42 +7,22 @@ Created on Wed Apr  4 19:46:16 2018
 """
 
 #%%
-import numpy as np
-import h5py
-
-
-h5f = h5py.File('/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix/trainData.hdf5','r')
-x_train = h5f['train_3000_'][...]
-h5f.close()
-#%%
-print(x_train.shape)
-#%%
-h5f = h5py.File('trainResult.hdf5','r')
-y_train = h5f['result_3000'][...]
-h5f.close()
-
-
-h5f = h5py.File('testData.hdf5','r')
-x_test = h5f['test_3000_'][...]
-h5f.close()
-
-
-
-h5f = h5py.File('testResult.hdf5','r')
-y_test = h5f['resultTest_3000'][...]
-h5f.close()
+from myUtils import getTestData2Points
+x_train,y_train,x_test,y_test = getTestData2Points()
 
 
 #%%
 import keras
+import math
+import keras.initializers as ki
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D
+from keras import backend as K
 
-
+   
 batch_size=256
 epochs=100
-
 def getModel(input_shape=(32,32,2)):
     model = Sequential()
     
@@ -91,10 +71,9 @@ def getModel(input_shape=(32,32,2)):
 model = getModel()
 print(model.summary())
 
-
 #%%
-opt = keras.optimizers.Nadam(lr=0.0001)
-model.compile(optimizer='nadam',
+opt = keras.optimizers.nadam(lr=0.002)
+model.compile(optimizer=opt,
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
