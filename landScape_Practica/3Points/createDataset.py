@@ -164,6 +164,7 @@ count_thr = 15
 if __name__ == '__main__':
     with Pool(count_thr) as p:
       allVal = p.map(calcMultiThreads, range(count_thr)) # первый индекс кол-в потоков, второй кол-во перемен(в нашем случае3)
+
 #%%
 #allVal=np.stack(allVal,axis=0)
 dp=[]

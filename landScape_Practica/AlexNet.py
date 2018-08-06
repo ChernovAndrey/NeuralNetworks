@@ -7,10 +7,13 @@ Created on Wed Apr  4 19:46:16 2018
 """
 
 #%%
-from myUtils import getTestData2Points
-x_train,y_train,x_test,y_test = getTestData2Points()
+work_dir ='/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix_fixed/'
+from myUtils import readData
 
-
+x_train = readData(work_dir+'dataset_30_07_2018','x_train')
+x_test = readData(work_dir+'dataset_30_07_2018','x_test')
+y_train = readData(work_dir+'dataset_30_07_2018','y_train')
+y_test  = readData(work_dir+'dataset_30_07_2018','y_test')
 #%%
 import keras
 import math

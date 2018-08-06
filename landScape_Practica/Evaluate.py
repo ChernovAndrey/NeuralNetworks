@@ -7,15 +7,15 @@ Created on Wed Apr 11 10:30:34 2018
 """
 #%%  
 from myUtils import readData
-import numppy as np
-y_test=readData('testResult.hdf5','resultTest_3000')
-x_test = readData('testData.hdf5','test_3000_')
+import numpy as np
+y_test=readData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix_fixed/dataset_30_07_2018','y_test')
+x_test = readData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix_fixed/dataset_30_07_2018','x_test')
 
 print(x_test.shape)
 print(y_test.shape)
 #%%
 from keras.models import load_model
-model = load_model('/home/andrey/datasetsNN/landScapes/landScape_3000_32/AlexNet/model_AlexNet_second.hdf5')
+model = load_model('/home/andrey/datasetsNN/landScapes/landScape_3000_32/model_AlexNet_fullConv550_01_08_2018.hdf5')
 print(model.summary())
 #%% только для graph cnn(3 точки)
 
@@ -34,6 +34,16 @@ x_test = x_test[:,:,:,:1] # 360000*32*32*4 ->360000*32*32*1
 #%%
 from sklearn.metrics import confusion_matrix
 res_predict = model.predict([x_test,])
+#%%
+#%% 2 points
+import matplotlib.pyplot as plt
+res_predict = res_predict.reshape(-1)
+def show_distribution_output():# распредление выходов видимых и невидимых точек
+    ind_0 = np.where(y_test==0)
+    ind_1 = np.where(y_test==1)
+    plt.plot(np.sort(res_predict[ind_1]))        
+show_distribution_output()
+        
 #%%
 res_predict = np.reshape(res_predict,(-1))
 y_test = np.reshape(y_test,(-1))

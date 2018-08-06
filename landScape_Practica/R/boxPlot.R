@@ -2,19 +2,18 @@ library(h5)
 library(ggplot2)
 library(car)
 library(sp)
-file <- h5file("/home/andrey/datasetsNN/landScapes/landScape_3000_32/dissection/p-value", 'r')
-numLayers=13
-h5close(file)
 
+numLayers=17
 
 name <- "p_val_shift"
 name <- "p_val_variance"
 
 list_p_val <-list()
-for (i in 0:14){
+file <- h5file("/home/andrey/datasetsNN/landScapes/landScape_3000_32/p_val_02_08_2018/p-value_global", 'r')
+for (i in 0:16){
   p_val<-file[paste(name,toString(i),sep="")]
   print(p_val[])
-p_val<-sapply(p_val[],function(x){
+  p_val<-sapply(p_val[],function(x){
     if (x <= 1e-16){
       return(1e-16)
     }else{
@@ -25,10 +24,11 @@ p_val<-sapply(p_val[],function(x){
   print(p_val)
   list_p_val[[i+1]] <- (p_val[])
 }
+h5close(file)
 
-boxplot(list_p_val,log="y",ylab ="shift",las=2,names = c("conv","max pool","bat_norm","conv","max_pool","bat_norm",
-                                                    "conv","conv","drop_out","conv","max_pool","bat_norm","flatten",
-                                                   "dense","dense") )
+boxplot(list_p_val,log="y",ylab =name,las=2,names = c("conv2d","max pool","bat_norm","drop_out","conv2d","max_pool",
+                                                         "bat_norm","drop_out","conv2d","max_pool",
+                                                         "bat_norm","reshape","conv1d","conv1d","conv1d","flatten","activation") )
 abline(h=1e-4, col = "Red",log="y")
 
 print(list_p_val[[5]])

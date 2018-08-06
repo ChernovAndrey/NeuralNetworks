@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.25)  5 AUG 2018 18:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.25)  5 AUG 2018 19:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -504,173 +504,460 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 109.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 109.
- [4] <shift0.pdf, id=46, 433.62pt x 289.08pt>
-File: shift0.pdf Graphic file (type pdf)
- <use shift0.pdf>
-Package pdftex.def Info: shift0.pdf used on input line 112.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+ [4]
 
-<var0.pdf, id=47, 433.62pt x 289.08pt>
-File: var0.pdf Graphic file (type pdf)
- <use var0.pdf>
-Package pdftex.def Info: var0.pdf used on input line 114.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+LaTeX Warning: File `shift0.pdf' not found on input line 112.
 
-<shift1.pdf, id=48, 433.62pt x 289.08pt>
-File: shift1.pdf Graphic file (type pdf)
- <use shift1.pdf>
-Package pdftex.def Info: shift1.pdf used on input line 121.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<var1.pdf, id=49, 433.62pt x 289.08pt>
-File: var1.pdf Graphic file (type pdf)
- <use var1.pdf>
-Package pdftex.def Info: var1.pdf used on input line 123.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+! Package pdftex.def Error: File `shift0.pdf' not found.
 
-<shift2.pdf, id=50, 433.62pt x 289.08pt>
-File: shift2.pdf Graphic file (type pdf)
- <use shift2.pdf>
-Package pdftex.def Info: shift2.pdf used on input line 129.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 ...{{\includegraphics[scale=0.4]{shift0.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<var2.pdf, id=51, 433.62pt x 289.08pt>
-File: var2.pdf Graphic file (type pdf)
- <use var2.pdf>
-Package pdftex.def Info: var2.pdf used on input line 131.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+LaTeX Font Info:    Try loading font information for T2A+cmtt on input line 112
+.
+(/usr/share/texlive/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
+File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
+)
 
-<shift3.pdf, id=52, 433.62pt x 289.08pt>
-File: shift3.pdf Graphic file (type pdf)
- <use shift3.pdf>
-Package pdftex.def Info: shift3.pdf used on input line 138.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+LaTeX Warning: File `var0.pdf' not found on input line 114.
 
-<var3.pdf, id=53, 433.62pt x 289.08pt>
-File: var3.pdf Graphic file (type pdf)
- <use var3.pdf>
-Package pdftex.def Info: var3.pdf used on input line 140.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<shift4.pdf, id=54, 433.62pt x 289.08pt>
-File: shift4.pdf Graphic file (type pdf)
- <use shift4.pdf>
-Package pdftex.def Info: shift4.pdf used on input line 147.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+! Package pdftex.def Error: File `var0.pdf' not found.
 
-<var4.pdf, id=55, 433.62pt x 289.08pt>
-File: var4.pdf Graphic file (type pdf)
- <use var4.pdf>
-Package pdftex.def Info: var4.pdf used on input line 149.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.114     {{\includegraphics[scale=0.4]{var0.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<shift5.pdf, id=56, 433.62pt x 289.08pt>
-File: shift5.pdf Graphic file (type pdf)
- <use shift5.pdf>
-Package pdftex.def Info: shift5.pdf used on input line 156.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<var5.pdf, id=57, 433.62pt x 289.08pt>
-File: var5.pdf Graphic file (type pdf)
- <use var5.pdf>
-Package pdftex.def Info: var5.pdf used on input line 158.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+LaTeX Warning: File `shift1.pdf' not found on input line 121.
 
-<shift6.pdf, id=58, 433.62pt x 289.08pt>
-File: shift6.pdf Graphic file (type pdf)
- <use shift6.pdf>
-Package pdftex.def Info: shift6.pdf used on input line 166.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<var6.pdf, id=59, 433.62pt x 289.08pt>
-File: var6.pdf Graphic file (type pdf)
- <use var6.pdf>
-Package pdftex.def Info: var6.pdf used on input line 168.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+! Package pdftex.def Error: File `shift1.pdf' not found.
 
-<shift7.pdf, id=60, 433.62pt x 289.08pt>
-File: shift7.pdf Graphic file (type pdf)
- <use shift7.pdf>
-Package pdftex.def Info: shift7.pdf used on input line 176.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.121 ...{{\includegraphics[scale=0.4]{shift1.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<var7.pdf, id=61, 433.62pt x 289.08pt>
-File: var7.pdf Graphic file (type pdf)
- <use var7.pdf>
-Package pdftex.def Info: var7.pdf used on input line 178.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<shift8.pdf, id=62, 433.62pt x 289.08pt>
-File: shift8.pdf Graphic file (type pdf)
- <use shift8.pdf>
-Package pdftex.def Info: shift8.pdf used on input line 186.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+LaTeX Warning: File `var1.pdf' not found on input line 123.
 
-<var8.pdf, id=63, 433.62pt x 289.08pt>
-File: var8.pdf Graphic file (type pdf)
- <use var8.pdf>
-Package pdftex.def Info: var8.pdf used on input line 188.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<shift9.pdf, id=64, 433.62pt x 289.08pt>
-File: shift9.pdf Graphic file (type pdf)
- <use shift9.pdf>
-Package pdftex.def Info: shift9.pdf used on input line 196.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+! Package pdftex.def Error: File `var1.pdf' not found.
 
-<var9.pdf, id=65, 433.62pt x 289.08pt>
-File: var9.pdf Graphic file (type pdf)
- <use var9.pdf>
-Package pdftex.def Info: var9.pdf used on input line 198.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.123     {{\includegraphics[scale=0.4]{var1.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<shift10.pdf, id=66, 433.62pt x 289.08pt>
-File: shift10.pdf Graphic file (type pdf)
- <use shift10.pdf>
-Package pdftex.def Info: shift10.pdf used on input line 206.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<var10.pdf, id=67, 433.62pt x 289.08pt>
-File: var10.pdf Graphic file (type pdf)
- <use var10.pdf>
-Package pdftex.def Info: var10.pdf used on input line 208.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+LaTeX Warning: File `shift2.pdf' not found on input line 129.
 
-<shift11.pdf, id=68, 433.62pt x 289.08pt>
-File: shift11.pdf Graphic file (type pdf)
- <use shift11.pdf>
-Package pdftex.def Info: shift11.pdf used on input line 215.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<var11.pdf, id=69, 433.62pt x 289.08pt>
-File: var11.pdf Graphic file (type pdf)
- <use var11.pdf>
-Package pdftex.def Info: var11.pdf used on input line 217.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+! Package pdftex.def Error: File `shift2.pdf' not found.
 
-<shift12.pdf, id=70, 433.62pt x 289.08pt>
-File: shift12.pdf Graphic file (type pdf)
- <use shift12.pdf>
-Package pdftex.def Info: shift12.pdf used on input line 224.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.129 ...{{\includegraphics[scale=0.4]{shift2.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-<var12.pdf, id=71, 433.62pt x 289.08pt>
-File: var12.pdf Graphic file (type pdf)
- <use var12.pdf>
-Package pdftex.def Info: var12.pdf used on input line 226.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
 
-<shift13.pdf, id=72, 433.62pt x 289.08pt>
-File: shift13.pdf Graphic file (type pdf)
- <use shift13.pdf>
-Package pdftex.def Info: shift13.pdf used on input line 233.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+LaTeX Warning: File `var2.pdf' not found on input line 131.
 
-<var13.pdf, id=73, 433.62pt x 289.08pt>
-File: var13.pdf Graphic file (type pdf)
- <use var13.pdf>
-Package pdftex.def Info: var13.pdf used on input line 235.
-(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+
+! Package pdftex.def Error: File `var2.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131     {{\includegraphics[scale=0.4]{var2.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift3.pdf' not found on input line 138.
+
+
+! Package pdftex.def Error: File `shift3.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.138 ...{{\includegraphics[scale=0.4]{shift3.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var3.pdf' not found on input line 140.
+
+
+! Package pdftex.def Error: File `var3.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.140     {{\includegraphics[scale=0.4]{var3.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift4.pdf' not found on input line 147.
+
+
+! Package pdftex.def Error: File `shift4.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.147 ...{{\includegraphics[scale=0.4]{shift4.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var4.pdf' not found on input line 149.
+
+
+! Package pdftex.def Error: File `var4.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.149     {{\includegraphics[scale=0.4]{var4.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift5.pdf' not found on input line 156.
+
+
+! Package pdftex.def Error: File `shift5.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.156 ...{{\includegraphics[scale=0.4]{shift5.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var5.pdf' not found on input line 158.
+
+
+! Package pdftex.def Error: File `var5.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.158     {{\includegraphics[scale=0.4]{var5.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift6.pdf' not found on input line 166.
+
+
+! Package pdftex.def Error: File `shift6.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.166 ...{{\includegraphics[scale=0.4]{shift6.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var6.pdf' not found on input line 168.
+
+
+! Package pdftex.def Error: File `var6.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.168     {{\includegraphics[scale=0.4]{var6.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift7.pdf' not found on input line 176.
+
+
+! Package pdftex.def Error: File `shift7.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.176 ...{{\includegraphics[scale=0.4]{shift7.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var7.pdf' not found on input line 178.
+
+
+! Package pdftex.def Error: File `var7.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.178     {{\includegraphics[scale=0.4]{var7.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift8.pdf' not found on input line 186.
+
+
+! Package pdftex.def Error: File `shift8.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.186 ...{{\includegraphics[scale=0.4]{shift8.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var8.pdf' not found on input line 188.
+
+
+! Package pdftex.def Error: File `var8.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.188     {{\includegraphics[scale=0.4]{var8.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift9.pdf' not found on input line 196.
+
+
+! Package pdftex.def Error: File `shift9.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.196 ...{{\includegraphics[scale=0.4]{shift9.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var9.pdf' not found on input line 198.
+
+
+! Package pdftex.def Error: File `var9.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.198     {{\includegraphics[scale=0.4]{var9.pdf}
+                                                  }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift10.pdf' not found on input line 206.
+
+
+! Package pdftex.def Error: File `shift10.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.206 ...{\includegraphics[scale=0.4]{shift10.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var10.pdf' not found on input line 208.
+
+
+! Package pdftex.def Error: File `var10.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.208     {{\includegraphics[scale=0.4]{var10.pdf}
+                                                   }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift11.pdf' not found on input line 215.
+
+
+! Package pdftex.def Error: File `shift11.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.215 ...{\includegraphics[scale=0.4]{shift11.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var11.pdf' not found on input line 217.
+
+
+! Package pdftex.def Error: File `var11.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.217     {{\includegraphics[scale=0.4]{var11.pdf}
+                                                   }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift12.pdf' not found on input line 224.
+
+
+! Package pdftex.def Error: File `shift12.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.224 ...{\includegraphics[scale=0.4]{shift12.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var12.pdf' not found on input line 226.
+
+
+! Package pdftex.def Error: File `var12.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.226     {{\includegraphics[scale=0.4]{var12.pdf}
+                                                   }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `shift13.pdf' not found on input line 233.
+
+
+! Package pdftex.def Error: File `shift13.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.233 ...{\includegraphics[scale=0.4]{shift13.pdf}
+                                                   }}
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `var13.pdf' not found on input line 235.
+
+
+! Package pdftex.def Error: File `var13.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.235     {{\includegraphics[scale=0.4]{var13.pdf}
+                                                   }}%
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 243.
 Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 243.
@@ -680,35 +967,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 243.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 243.
- [5 <./shift0.pdf> <./var0.pdf
-
-pdfTeX warning: pdflatex (file ./var0.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift1.pdf
-
-pdfTeX warning: pdflatex (file ./shift1.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./var1.pdf
-
-pdfTeX warning: pdflatex (file ./var1.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift2.pdf
-
-pdfTeX warning: pdflatex (file ./shift2.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./var2.pdf
-
-pdfTeX warning: pdflatex (file ./var2.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift3.pdf
-
-pdfTeX warning: pdflatex (file ./shift3.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./var3.pdf
-
-pdfTeX warning: pdflatex (file ./var3.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
->]
+[5]
 Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 243.
 Package babel Info: Redefining russian shorthand "~
@@ -717,93 +976,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 243.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 243.
- [6 <./shift4.pdf> <./var4.pdf
-
-pdfTeX warning: pdflatex (file ./var4.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift5.pdf
-
-pdfTeX warning: pdflatex (file ./shift5.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./var5.pdf
-
-pdfTeX warning: pdflatex (file ./var5.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift6.pdf
-
-pdfTeX warning: pdflatex (file ./shift6.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./var6.pdf
-
-pdfTeX warning: pdflatex (file ./var6.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift7.pdf
-
-pdfTeX warning: pdflatex (file ./shift7.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./var7.pdf
-
-pdfTeX warning: pdflatex (file ./var7.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
->]
-Package babel Info: Redefining russian shorthand "|
-(babel)             in language append on input line 243.
-Package babel Info: Redefining russian shorthand "~
-(babel)             in language append on input line 243.
-Package babel Info: Redefining russian shorthand "|
-(babel)             in language append on input line 243.
-Package babel Info: Redefining russian shorthand "~
-(babel)             in language append on input line 243.
- [7 <./shift8.pdf> <./var8.pdf
-
-pdfTeX warning: pdflatex (file ./var8.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift9.pdf
-
-pdfTeX warning: pdflatex (file ./shift9.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./var9.pdf
-
-pdfTeX warning: pdflatex (file ./var9.pdf): PDF inclusion: multiple pdfs with p
-age group included in a single page
-> <./shift10.pdf
-
-pdfTeX warning: pdflatex (file ./shift10.pdf): PDF inclusion: multiple pdfs wit
-h page group included in a single page
-> <./var10.pdf
-
-pdfTeX warning: pdflatex (file ./var10.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
-> <./shift11.pdf
-
-pdfTeX warning: pdflatex (file ./shift11.pdf): PDF inclusion: multiple pdfs wit
-h page group included in a single page
-> <./var11.pdf
-
-pdfTeX warning: pdflatex (file ./var11.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
->]
-Package babel Info: Redefining russian shorthand "|
-(babel)             in language append on input line 243.
-Package babel Info: Redefining russian shorthand "~
-(babel)             in language append on input line 243.
-Package babel Info: Redefining russian shorthand "|
-(babel)             in language append on input line 243.
-Package babel Info: Redefining russian shorthand "~
-(babel)             in language append on input line 243.
- [8 <./shift12.pdf> <./var12.pdf
-
-pdfTeX warning: pdflatex (file ./var12.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
-> <./shift13.pdf
-
-pdfTeX warning: pdflatex (file ./shift13.pdf): PDF inclusion: multiple pdfs wit
-h page group included in a single page
-> <./var13.pdf
-
-pdfTeX warning: pdflatex (file ./var13.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
->]
+ [6]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 243.
  (./all_pictures.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 243.
@@ -822,11 +995,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 243.
 ### simple group (level 1) entered at line 401 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 11521 strings out of 493029
- 161826 string characters out of 6136234
- 241327 words of memory out of 5000000
- 14881 multiletter control sequences out of 15000+600000
- 10613 words of font info for 37 fonts, out of 8000000 for 9000
+ 11428 strings out of 493029
+ 160772 string characters out of 6136234
+ 242327 words of memory out of 5000000
+ 14784 multiletter control sequences out of 15000+600000
+ 10923 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,9n,40p,770b,1558s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t2a.enc}</u
@@ -834,12 +1007,13 @@ sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sfrm1200.pfb>
-Output written on all_pictures.pdf (8 pages, 243401 bytes).
+onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super
+/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on all_pictures.pdf (6 pages, 129873 bytes).
 PDF statistics:
- 678 PDF objects out of 1000 (max. 8388607)
- 252 compressed objects within 3 object streams
- 25 named destinations out of 1000 (max. 500000)
- 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 103 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
+ 23 named destinations out of 1000 (max. 500000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

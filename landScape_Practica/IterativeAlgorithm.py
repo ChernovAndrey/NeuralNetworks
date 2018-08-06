@@ -34,28 +34,29 @@ def sumVector(v1,v2):
 def calculateResult(p1,p2, matrix):
     if ((p1[0]-p2[0]==0)and(p1[1]-p2[1]==0)and(p1[2]-p2[2]==0)):
         return True
-    tau=0.01 
+    tau=0.001 
     z = p1 # итеративная перменная.
     n = get_n(p1,p2)
     n = multiNumber_Vector(tau,n)
-    eps=0.011
+    eps=0.0011
     countIter=0
     while( residual(z,p2) > eps):       
         countIter+=1
         if (countIter>100000):
             print("not work")
-            return False
+            return False, 0.0
         z = sumVector(z,n)
         _,x =math.modf(z[0])
         _,y =math.modf(z[1])
         x = int(x)
         y = int(y)
-        if ((x==p2[0])and(y==p2[1])):
-            return True
         value = matrix[x][y]
-        if ( (z[2]<value) and  ((x!=p1[0])or(y!=p1[1])) ):
-            return False
-    return True    
+        reject = z[2] - value
+        if ((x==p2[0])and(y==p2[1])):
+            return True, reject
+        if ( (reject<0) and  ((x!=p1[0])or(y!=p1[1])) ):
+            return False, reject
+    return True,reject    
 
 
 
