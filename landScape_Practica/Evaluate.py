@@ -5,18 +5,24 @@ Created on Wed Apr 11 10:30:34 2018
 
 @author: andrey
 """
-#%%  
+#%% 
 from myUtils import readData
 import numpy as np
-y_test=readData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix_fixed/dataset_30_07_2018','y_test')
-x_test = readData('/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix_fixed/dataset_30_07_2018','x_test')
-
-print(x_test.shape)
-print(y_test.shape)
-#%%
+from sklearn.metrics import confusion_matrix
+import math
 from keras.models import load_model
-model = load_model('/home/andrey/datasetsNN/landScapes/landScape_3000_32/model_AlexNet_fullConv550_01_08_2018.hdf5')
-print(model.summary())
+import matplotlib.pyplot as plt
+from sklearn.metrics import precision_score,recall_score,f1_score,accuracy_score, roc_curve, auc
+
+path_to_dataset =  '/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix_fixed/dataset_30_07_2018'
+path_to_model = '/home/andrey/datasetsNN/landScapes/landScape_3000_32/model_AlexNet_fullConv550_01_08_2018.hdf5'
+name_y_test = 'y_test'
+name_x_test = 'x_test'
+count_points = 2 # реализовано только для двух и трех точек на ландшафте.
+count_input_martix=2 # кол-во входных матрица в сетку
+count_train = 300000  
+count_train = 60000
+image_size = 32
 #%% только для graph cnn(3 точки)
 
 def getPoints(matrix): #32*32
@@ -29,28 +35,22 @@ def getPoints(matrix): #32*32
                 k+=1
     return p                
 
-p_test = getPoints(x_test)
-x_test = x_test[:,:,:,:1] # 360000*32*32*4 ->360000*32*32*1
-#%%
-from sklearn.metrics import confusion_matrix
-res_predict = model.predict([x_test,])
-#%%
 #%% 2 points
-import matplotlib.pyplot as plt
-res_predict = res_predict.reshape(-1)
-def show_distribution_output():# распредление выходов видимых и невидимых точек
+def show_distribution_output(res_predict,y_test):# распредление выходов видимых и невидимых точек
+    if count_points !=2:
+        print('эта функция только для двух точек')
+        return
+    
     ind_0 = np.where(y_test==0)
     ind_1 = np.where(y_test==1)
-    plt.plot(np.sort(res_predict[ind_1]))        
-show_distribution_output()
-        
+    plt.hist(res_predict[ind_0], bins = list(np.arange(0.0, 1.0, 0.05))) 
+    plt.hist(res_predict[ind_1], bins = list(np.arange(0.0, 1.0, 0.05))) 
+    plt.title("histogram") 
+    plt.show()
+#    print(len(ind_0[0]))
+#    print(len(ind_1[0]))
+#    plt.plot(np.sort(res_predict[ind_1]))        
 #%%
-res_predict = np.reshape(res_predict,(-1))
-y_test = np.reshape(y_test,(-1))
-print(res_predict.shape)
-print(y_test.shape)
-#%%
-import numpy as np
 def getInt(vector): # zero or one
     res=np.zeros(vector.shape, dtype=int)
     for i in range(len(vector)):
@@ -60,32 +60,8 @@ def getInt(vector): # zero or one
             res[i]=0
     return res
 
-y_pred= res_predict.reshape(-1)
-
-res_pred=getInt(y_pred)
-res_test=getInt(y_test)
-y_test.sum()
-#%%
-confusion_matrix(res_test,res_pred)
-#%%
-from sklearn.metrics import precision_score,recall_score,f1_score,accuracy_score
-print("val accuracy",accuracy_score(res_test,res_pred))
-print("Точность:",precision_score(res_test,res_pred))
-print("Полнота:",recall_score(res_test,res_pred))
-print("F1:",f1_score(res_test,res_pred)) # 0.856 лучшая; для 3 точек лучшая 0.742
-
-#%%
-
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import roc_curve, auc
-
-
-def ROC_plot():
-#    fpr = dict()
-#    tpr = dict()
-#    roc_auc = dict()
-    fpr, tpr, thr = roc_curve(res_test, y_pred)
+def ROC_plot(y_test,res_predict):
+    fpr, tpr, thr = roc_curve(y_test, res_predict)
     roc_auc= auc(fpr, tpr)
     
     plt.figure()
@@ -104,41 +80,28 @@ def ROC_plot():
     print(fpr)
     print(tpr)
     print(thr)
-    
-    print(res_test.shape)
-    print(res_pred.shape)
-ROC_plot()
-
-#%%
-
-ind_FP = np.where(( (res_test==0) & (res_pred==1)))[0] #  то есть res_test = 0 , а res_pred = 1
-ind_FN = np.where(( (res_test==1) & (res_pred==0)))[0] #  то есть res_test = 1 , а res_pred = 0
-print(ind_FP.shape)
-print(ind_FN.shape)
-
 
 
 #%% вывод reject
-reject=readData('reject.hdf5','reject')
-print(reject.shape)
-count_train = 300000
-rej_test=reject.reshape( (reject.shape[0]*reject.shape[1]*reject.shape[2],-1) )[count_train:]
-
-print(rej_test.shape)
-rej_test=rej_test.reshape(-1)
-print(rej_test.shape)
-
-vectorReject=plt.hist(rej_test, bins = [-3,-2,-1,0,1,2,3]) 
-plt.title("histogram") 
-plt.show()
+def get_and_show_reject():
+    reject=readData('reject.hdf5','reject')
+    print(reject.shape)
+    rej_test=reject.reshape( (reject.shape[0]*reject.shape[1]*reject.shape[2],-1) )[count_train:] 
+    rej_test=rej_test.reshape(-1)
+    print(rej_test.shape) 
+    plt.hist(rej_test, bins = [-3,-2,-1,0,1,2,3]) 
+    plt.title("histogram") 
+    plt.show()
+    return rej_test
 #%%
-ind_FP = np.where(( (res_test==0) & (res_pred==1)))[0] #  то есть res_test = 0 , а res_pred = 1
-ind_FN = np.where(( (res_test==1) & (res_pred==0)))[0] #  то есть res_test = 1 , а res_pred = 0
-print(ind_FP.shape)
-print(ind_FN.shape)
+def get_errors_index(y_test,res_predict):
+    ind_FP = np.where(( (y_test==0) & (res_predict==1)))[0] #  то есть y_test = 0 , а res_predict = 1
+    ind_FN = np.where(( (y_test==1) & (res_predict==0)))[0] #  то есть y_test = 1 , а res_predict = 0
+    print('ind_FP shape: ',ind_FP.shape)
+    print('ind_FN shape: ',ind_FN.shape)
+    return ind_FP, ind_FN
 
-
-def show_errors_samples(ind):#ind - индексы error samples
+def show_errors_samples(ind,rej_test):#ind - индексы error samples
     errFP=np.empty(shape=(len(ind)))
     j=0
     for i in range(len(ind)):
@@ -147,20 +110,13 @@ def show_errors_samples(ind):#ind - индексы error samples
     plt.hist(errFP, bins = [-3,-2,-1,0,1,2,3]) 
     plt.title("histogram") 
     plt.show()
-    
-show_errors_samples(ind_FN)
-show_errors_samples(ind_FP)
 #%%
-def check_bug():
-    bugEl = np.where(( (rej_test<0) & (y_test==1)))[0] #  то есть res_test = 0 , а res_pred = 1
+def check_bug(rej_test,y_test): # проверка датасета на ошибки
+    bugEl = np.where(( (rej_test<0) & (y_test==1)))[0] #  то есть y_test = 0 , а res_predict = 1
     print(rej_test[bugEl[0]],y_test[bugEl[0]])
 
 
 #%% для двух точек
-import numpy as np
-import math
-print(x_test.shape)
-
 
 
 def getDistance(p1,p2):
@@ -168,20 +124,14 @@ def getDistance(p1,p2):
 
 def getDistance_arrays(ind, matrixData): 
     dist = np.empty(shape=(len(ind)))
+    print(matrixData.shape)
     for i in range(len(ind)):
         p = getPoints(matrixData[ind[i]][1])
         dist[i] = getDistance(p[0],p[1])
     return dist    
 #        dist[i] = getDistance(p[0],p[1])
 
-count_train = 60000
-image_size = 32
-count_input_martix=2 # кол-во входных матрица в сетку
               
-matrixData = x_test.reshape(count_train,count_input_martix,image_size,image_size)                
-print(matrixData.shape)
-distFP = getDistance_arrays(ind_FP, matrixData)
-distFN = getDistance_arrays(ind_FN, matrixData)
 #%%
 def hist_dist(dist,bins=[0,5,10,15,20,25,30,32]):    
     vector = plt.hist(dist, bins = [0,5,10,15,20,25,30,32]) 
@@ -189,21 +139,55 @@ def hist_dist(dist,bins=[0,5,10,15,20,25,30,32]):
     plt.show()
     return vector
 
-vectorFN = hist_dist(distFN)
-vectorFP = hist_dist(distFP)
-    
+def show_hist_dist(matrixData):# сравнение распределения расстояния между точками для всех результатов и для ошибочных
+    ind_all=np.arange(count_train)
+    distAll=getDistance_arrays(ind_all,matrixData)
+    vectorAll = hist_dist(distAll)
+    distFP = getDistance_arrays(ind_FP, matrixData)
+    distFN = getDistance_arrays(ind_FN, matrixData)
+    vectorFN = hist_dist(distFN)
+    vectorFP = hist_dist(distFP)
+    relFP = vectorFP[0]/vectorAll[0]
+    print('relFP= ',relFP)
+    relFN = vectorFN[0]/vectorAll[0]
+    print('relFN= ',relFN)
 #%%
-ind_all=np.arange(count_train)
-distAll=getDistance_arrays(ind_all,matrixData)
-vectorAll = hist_dist(distAll)
 
-#%%
-print(vectorAll[0])
-print(vectorFP[0])
-relFP = vectorFP[0]/vectorAll[0]
-print(relFP)
-#%%
-print(vectorAll[0])
-print(vectorFN[0])
-relFN = vectorFN[0]/vectorAll[0]
-print(relFN)
+if __name__ == "__main__":
+    x_test=readData(path_to_dataset,name_x_test)
+    y_test=readData(path_to_dataset,name_y_test)
+    print('x_test shape: ',x_test.shape)
+    print('y_test shape: ',y_test.shape)
+    
+    
+    model = load_model(path_to_model)
+    print(model.summary())
+    
+#    для graphCNN    
+#        p_test = getPoints(x_test)
+#        x_test = x_test[:,:,:,:1] # 360000*32*32*4 ->360000*32*32*1 (убираем матрицы точек)
+  
+    res_predict = model.predict([x_test,])
+    res_predict = res_predict.reshape(-1)
+    y_test = np.reshape(y_test,(-1))
+    show_distribution_output(res_predict,y_test)
+    ROC_plot(y_test,res_predict)
+    res_predict=getInt(res_predict)
+    y_test=getInt(y_test)
+
+    confusion_matrix(y_test,res_predict)
+    print("val accuracy",accuracy_score(y_test,res_predict))
+    print("Точность:",precision_score(y_test,res_predict))
+    print("Полнота:",recall_score(y_test,res_predict))
+    print("F1:",f1_score(y_test,res_predict))
+
+    ind_FP, ind_FN = get_errors_index(y_test,res_predict)
+#    show_errors_samples(ind_FP) by reject
+#    show_errors_samples(ind_FN)
+    
+    matrixData = x_test.reshape(count_train,count_input_martix,image_size,image_size)                
+    print('matrixData shape = ',matrixData.shape)
+    show_hist_dist(matrixData)
+
+
+

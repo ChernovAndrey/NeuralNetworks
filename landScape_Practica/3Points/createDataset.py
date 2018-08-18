@@ -7,27 +7,27 @@ Created on Wed Apr 25 11:18:40 2018
 """
 
 #%%
-def readData(path,name):
-    import h5py
-    h5f = h5py.File(path,'r')
-    result = h5f[name][...]
-    h5f.close()
-    return result
+import numpy as np
+import random
+import math
+from IterativeAlgorithmWithAnswer import calculateResult as calcRes_2points
+from myUtils import readData, saveData
+from multiprocessing import Pool
+count_thr = 15
 #%%
+count_landscapes=3000
+count_tuples=5# количество комбанаций в данном случае трех точек на одном ландшафте
+count_shifts=8
+count_pixels=32
+count_points = 3
+
 path ='Landscapes_3000_32x32_clear.hdf5'
-X_data = readData(path,'Landscapes')
+name_dataset = 'Landscapes'
+X_data = readData(path,name_dataset)
 print(X_data.shape)
 #%%
-
-
 def norm2(p1,p2):
     return math.sqrt(  (p2[0]-p1[0])*(p2[0]-p1[0])  +  (p2[1]-p1[1])*(p2[1]-p1[1])  )
-
-def saveData(path,name,data):
-    import h5py
-    h5f = h5py.File(path, 'w')
-    h5f.create_dataset(name, data=data,dtype=np.float32)
-    h5f.close()
 
 def random_points():
     p1= (random.randint(0,count_pixels-1),random.randint(0,count_pixels-1))
@@ -36,16 +36,6 @@ def random_points():
         p2= (random.randint(0,count_pixels-1),random.randint(0,count_pixels-1))
     return p1,p2       
 
-from IterativeAlgorithmWithAnswer import calculateResult as calcRes_2points
-import numpy as np
-import random
-import math
-
-count_landscapes=3000
-count_tuples=5# количество комбанаций в данном случае трех точек на одном ландшафте
-count_shifts=8
-count_pixels=32
-count_points = 3
 
     
 
@@ -100,6 +90,7 @@ def calculatePoint3(image,p1,p2, expResult_p1,expResult_p2): # expresult_pi=  о
 #            print("sorry I can not")
             return False,p3,result_p1,result_p2,min_reject1,min_reject2
     return True,p3,result_p1,result_p2,min_reject1,min_reject2    # первый bool-это смог ли он сгеренерить по даваемому ему результату. 
+
 def calculatePointsWithResults(matrix,expected_result):
     result = True
     flagFirst=False
@@ -159,8 +150,6 @@ def calcMultiThreads(l):
     return data3Points, result,rejects  #первый флаг - надо ли записывать результат                                         
 
 #%%
-from multiprocessing import Pool
-count_thr = 15
 if __name__ == '__main__':
     with Pool(count_thr) as p:
       allVal = p.map(calcMultiThreads, range(count_thr)) # первый индекс кол-в потоков, второй кол-во перемен(в нашем случае3)

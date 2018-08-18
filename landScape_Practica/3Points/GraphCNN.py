@@ -10,15 +10,10 @@ from keras.layers import Input, Embedding, LSTM, Dense, Conv2D, MaxPooling2D, Ba
 from keras.models import Model
 import keras
 import numpy as np
-def readData(path,name):
-    import h5py
-    h5f = h5py.File(path,'r')
-    result = h5f[name][...]
-    h5f.close()
-    return result
+from myUtils import readData
+
 def getIndexNonZeroInMatrix(matrix):
     nZero = np.nonzero(matrix)
-#    print(nZero)
     return nZero[0][0], nZero[1][0]   
 
 def getPoints(data):
@@ -35,8 +30,6 @@ def getPoints(data):
         Points[i]=p
     return Points    
 #%%
-
-
 x_train = readData('clearTrainData.hdf5','input')
 x_test=readData('clearTestData.hdf5','input')
 
@@ -49,7 +42,6 @@ p_test = getPoints(x_test)
 x_train = x_train[:,:,:,:1] # 360000*32*32*4 ->360000*32*32*1
 x_test = x_test[:,:,:,:1] # 360000*32*32*4 ->360000*32*32*1
 
-
 print("x")
 print(x_train.shape)
 print(x_test.shape)
@@ -60,7 +52,6 @@ print("points")
 print(p_train.shape)
 print(p_test.shape)
 
-#assert False,"все ок"
 #%%
 batch_size=256
 epochs=100
@@ -104,22 +95,22 @@ model = Model(inputs=[main_input, points_input], outputs=[main_output])
 
 print(model.summary()) 
 #%%
-#opt = keras.optimizers.Nadam(lr=0.0001)
-#model.compile(optimizer='nadam',
-#              loss='binary_crossentropy',
-#              metrics=['accuracy'])
-#
-#model.fit([x_train,p_train], y_train,
-#          batch_size=batch_size,
-#          epochs=epochs,
-#          verbose=2,
-#          validation_data=(x_test, y_test))
-#
-#score = model.evaluate([x_test,p_test], y_test, verbose=0)
-#print('Test loss:', score[0])
-#print('Test accuracy:', score[1])
-#
-#model.save('model_AlexNet_Graph_3Points.hdf5')
+opt = keras.optimizers.Nadam(lr=0.0002)
+model.compile(optimizer=opt,
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+model.fit([x_train,p_train], y_train,
+          batch_size=batch_size,
+          epochs=epochs,
+          verbose=2,
+          validation_data=(x_test, y_test))
+
+score = model.evaluate([x_test,p_test], y_test, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+
+model.save('model_AlexNet_Graph_3Points.hdf5')
 
 
 
