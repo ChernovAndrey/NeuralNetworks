@@ -1,7 +1,7 @@
 Установление видимости между точками на двумерных ландшафтках с помощью сверточных нейронных сетей. <br />
 Оценка качества сети: <br />
-Confusion matrix:
-![Alt text](images/con_matrix.png)
+Confusion matrix:<br />
+![Alt text](images/con_matrix.png)<br />
 val accuracy: 0.9438833333333333<br />
 Точность: 0.9292883653380668$<br />
 Полнота: 0.9607607607607608<br />
