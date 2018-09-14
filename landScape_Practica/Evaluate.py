@@ -14,10 +14,11 @@ from keras.models import load_model
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, roc_curve, auc
 
-path_to_dataset = '/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix_fixed/dataset_30_07_2018'
+path_to_dataset = '/home/andrey/datasetsNN/landScapes/landScape_sentember/dataset_11_09_2018_test.hdf5'
 path_to_model = '/home/andrey/datasetsNN/landScapes/landScape_3000_32/model_AlexNet_fullConv550_01_08_2018.hdf5'
 name_y_test = 'y_test'
-name_x_test = 'x_test'
+name_x_test = 'X_test'
+name_rej_test = 'rej_test'
 count_points = 2  # реализовано только для двух и трех точек на ландшафте.
 count_input_martix = 2  # кол-во входных матрица в сетку
 count_train = 300000
@@ -123,8 +124,14 @@ def show_errors_samples(ind, rej_test):  # ind - индексы error samples
 
 # %%
 def check_bug(rej_test, y_test):  # проверка датасета на ошибки
-    bugEl = np.where(((rej_test < 0) & (y_test == 1)))[0]  # то есть y_test = 0 , а res_predict = 1
-    print(rej_test[bugEl[0]], y_test[bugEl[0]])
+    bugEl1 = np.where(((rej_test < 0) & (y_test == 1)))[0]  
+    print(bugEl1)
+    print(len(bugEl1))
+#    print(rej_test[bugEl1[0]], y_test[bugEl1[0]])
+#
+    bugEl2 = np.where(((rej_test > 0) & (y_test == 0)))[0]  
+    print(len(bugEl2))
+#    print(rej_test[bugEl2[0]], y_test[bugEl2[0]])
 
 
 # %% для двух точек
@@ -173,8 +180,11 @@ def show_hist_dist(matrixData):  # сравнение распределения
 if __name__ == "__main__":
     x_test = readData(path_to_dataset, name_x_test)
     y_test = readData(path_to_dataset, name_y_test)
+    rej_test = readData(path_to_dataset, name_rej_test)
     print('x_test shape: ', x_test.shape)
     print('y_test shape: ', y_test.shape)
+    print('rej_test shape: ', rej_test.shape)
+    
 
     model = load_model(path_to_model)
     print(model.summary())
@@ -204,3 +214,4 @@ if __name__ == "__main__":
     matrixData = x_test.reshape(count_train, count_input_martix, image_size, image_size)
     print('matrixData shape = ', matrixData.shape)
     show_hist_dist(matrixData)
+#%% kek

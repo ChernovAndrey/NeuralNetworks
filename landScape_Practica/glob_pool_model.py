@@ -15,10 +15,9 @@ Created on Wed Apr  4 19:46:16 2018
 """
 
 # %%
-from myUtils import getTestData2Points
 import numpy as np
+from keras.models import load_model
 import h5py
-
 name_X = 'dataset_11_09_2018'
 #name_y = 'results_11_09_2018'
 name_y = name_X
@@ -47,12 +46,12 @@ print('x_train: ', x_train.shape)
 print('y_train: ', y_train.shape)
 print('x_test: ', x_test.shape)
 print('y_test: ', y_test.shape)
-
 # %%
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, BatchNormalization
-from keras.layers import Conv2D, MaxPooling2D, Conv1D, Reshape, Activation, GlobalAveragePooling2D
+from keras.layers import Conv2D, MaxPooling2D, Conv1D, Reshape, Activation, GlobalAveragePooling2D, GlobalMaxPooling2D
+
 batch_size = 256
 epochs = 100
 
@@ -60,20 +59,23 @@ epochs = 100
 def getModel(input_shape=(32, 32, 2)):
     model = Sequential()
 
-    model.add(Conv2D(32, kernel_size=(7, 7), padding='same', activation='relu', strides=(1, 1),
+    model.add(Conv2D(64, kernel_size=(7, 7), padding='same', activation='relu', strides=(1, 1),
                      input_shape=input_shape))  # 32*32
+    # model.add(Dropout(0.1))
     model.add(MaxPooling2D(pool_size=(3, 3)))  # 16*16
     model.add(BatchNormalization())
-
-    model.add(Conv2D(32, kernel_size=(5, 5), strides=(1, 1), activation='relu', padding='same'))  # 8*8
+    model.add(Dropout(0.1))
+    model.add(Conv2D(64, kernel_size=(5, 5), strides=(1, 1), activation='relu', padding='same'))  # 8*8
+    # model.add(Dropout(0.1))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(BatchNormalization())
+#    model.add(Dropout(0.2))
 
     # 3 64
     #    model.add(Conv2D(96,kernel_size=(3,3),activation='relu',padding='same',kernel_regularizer=keras.regularizers.l2(0.001)))  #8*8
     #
     #    #4 128
-    ##    model.add(Dropout(0.15))
+    # model.add(Dropout(0.2))
     #    model.add(Conv2D(96,kernel_size=(3,3),padding='same',activation='relu')) #4*4
     #
     #    #5
@@ -83,25 +85,34 @@ def getModel(input_shape=(32, 32, 2)):
 
     # fc layers
     #    dense_size = 2*2*128 # то есть 512
-#    model.add(Flatten())  # 2048
+    #   model.add(Flatten()) #2048
+#    model.add(Reshape((-1, 32)))
     model.add(GlobalAveragePooling2D())
-    model.add(Dense(1))
-#    model.add(Reshape((32)))
-    #    model.add(Dense(32, activation='relu')) #32
-#    model.add(Conv1D(filters=32, kernel_size=2, activation='relu'))  # 32
-#    model.add(Conv1D(filters=8, kernel_size=2, activation='relu'))  # 32
-#    model.add(Conv1D(filters=1, kernel_size=2))  # 32
+#    model.add(GlobalMaxPooling2D())
+    model.add(Dense(32, activation='relu'))
+#    model.add(Dense(32, activation='relu'))
+    model.add(Dense(1, activation='relu'))
+#    model.add(Conv1D(32, 2, activation='relu'))
+#    model.add(Conv1D(8, 2, activation='relu'))
+#    model.add(Conv1D(1, 2))
 #    model.add(Flatten())
 #    model.add(Activation('sigmoid'))
+    #    model.add(Dense(64, activation='relu')) #32
+    #    model.add(Dense(32, activation='relu')) #32
+
+    #    model.add(Dense(8, activation='relu')) #8
+
+    #    model.add(Dense(dense_size, activation='relu'))
+    #    model.add(Dense(1, activation='sigmoid'))  # че то совсем не уверен #sigmoid
     return model
 
-
-# EPOCH 30
 
 
 # main
 model = getModel()
+# model = load_model(name_model)
 print(model.summary())
+print(len(model.layers))
 
 # %%
 opt = keras.optimizers.Nadam(lr=0.0002)
@@ -119,4 +130,4 @@ score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
-model.save('model_AlexNet_second.hdf5')
+model.save('model_AlexNet_glob_aver_100_11_09_2018.hdf5')

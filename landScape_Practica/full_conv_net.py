@@ -18,27 +18,34 @@ Created on Wed Apr  4 19:46:16 2018
 import numpy as np
 from keras.models import load_model
 import h5py
+name_X = 'dataset_11_09_2018'
+#name_y = 'results_11_09_2018'
+name_y = name_X
 
-name_model = 'model_AlexNet_fullConv_30_07_2018_2.hdf5'
+#name_model = 'model_AlexNet_fullConv_30_07_2018_2.hdf5'
 
-h5f = h5py.File('dataset_30_07_2018', 'r')
-x_train = h5f['x_train'][...]
+h5f = h5py.File(name_X, 'r')
+x_train = h5f['X_train'][...]
 h5f.close()
 # %%
 print(x_train.shape)
 # %%
-h5f = h5py.File('dataset_30_07_2018', 'r')
+h5f = h5py.File(name_y, 'r')
 y_train = h5f['y_train'][...]
 h5f.close()
 
-h5f = h5py.File('dataset_30_07_2018', 'r')
-x_test = h5f['x_test'][...]
+h5f = h5py.File(name_X, 'r')
+x_test = h5f['X_test'][...]
 h5f.close()
 
-h5f = h5py.File('dataset_30_07_2018', 'r')
+h5f = h5py.File(name_y, 'r')
 y_test = h5f['y_test'][...]
 h5f.close()
 
+print('x_train: ', x_train.shape)
+print('y_train: ', y_train.shape)
+print('x_test: ', x_test.shape)
+print('y_test: ', y_test.shape)
 # %%
 import keras
 from keras.models import Sequential
@@ -46,7 +53,7 @@ from keras.layers import Dense, Dropout, Flatten, BatchNormalization
 from keras.layers import Conv2D, MaxPooling2D, Conv1D, Reshape, Activation
 
 batch_size = 256
-epochs = 50
+epochs = 20
 
 
 def getModel(input_shape=(32, 32, 2)):
@@ -95,8 +102,6 @@ def getModel(input_shape=(32, 32, 2)):
     return model
 
 
-# EPOCH 30
-
 
 # main
 model = getModel()
@@ -120,4 +125,4 @@ score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
-model.save('model_AlexNet_fullConv150_31_07_2018.hdf5')
+model.save('model_AlexNet_fullConv100_11_09_2018.hdf5')

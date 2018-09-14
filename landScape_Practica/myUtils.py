@@ -8,7 +8,7 @@ Created on Mon Jul  2 17:30:10 2018
 import numpy as np
 import h5py as h5
 
-work_dir_getTestData2Points = '/home/andrey/datasetsNN/landScapes/landScape_3000_32/mix/'
+work_dir_getTestData2Points = ''
 
 
 def saveData(path, name, data):
